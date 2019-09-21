@@ -1,0 +1,15 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:Journal
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:data/changelog/db.changelog-master.xml
+    enabled: true
