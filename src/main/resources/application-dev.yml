@@ -9,7 +9,6 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   liquibase:
-    change-log: classpath:data/changelog/db.changelog-master.xml
-    enabled: true
+    enabled: false
