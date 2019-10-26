@@ -18,7 +18,7 @@ public class Group {
 
     private String identifier;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
     private List<User> users;
 
 }

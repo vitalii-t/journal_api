@@ -7,7 +7,7 @@ import lombok.Data;
 public class GroupDto {
     private String identifier;
 
-    public GroupDto(Group entity){
+    public GroupDto(Group entity) {
         this.identifier = entity.getIdentifier();
     }
 }
