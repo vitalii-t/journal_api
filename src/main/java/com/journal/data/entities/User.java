@@ -36,7 +36,7 @@ public class User {
 
     @NotBlank(message = "Email can`t be empty")
     @Email(message = "Email is not correct")
-    @Column(name = "email", nullable = false,unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

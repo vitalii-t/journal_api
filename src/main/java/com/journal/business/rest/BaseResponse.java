@@ -21,7 +21,7 @@ public class BaseResponse<T> {
     /**
      * The http response code
      */
-    private int responseCode = 200;
+    private int responseCode;
     /**
      * Data to transfer
      */
