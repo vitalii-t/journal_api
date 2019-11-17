@@ -3,6 +3,7 @@ package com.journal.data.exceptions.handler;
 import com.journal.data.exceptions.UserNotFoundException;
 import com.journal.data.exceptions.dto.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @ControllerAdvice
@@ -67,11 +71,17 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         log.error(ex.getMessage());
 
+        List<String> errors = ex.getBindingResult().getAllErrors()
+                .stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
         ResponseBody responseBody = ResponseBody.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
                 .message(ERROR_VALIDATE_DATA)
-                .error(ex.getBindingResult().getAllErrors().toString())
+                .error(errors.toString())
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
 

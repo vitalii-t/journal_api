@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
         user.setActivationCode(null);
 
         user.getRoles().clear();
-        user.getRoles().add(Role.APPROVED);
+        user.getRoles().add(Role.STUDENT);
 
         userRepository.saveAndFlush(user);
 
