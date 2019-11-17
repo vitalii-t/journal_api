@@ -16,11 +16,10 @@ public interface ScheduleService {
     List<Schedule> findAll();
 
     /**
-     * Find schedule by week type and filter by subject name
+     * Find schedule by week type
      *
-     * @param subjectName subject name
      * @param weekType    week type
      * @return filtered schedule
      */
-    List<Week> findScheduleByWeek(String subjectName, String weekType);
+    List<Week> findScheduleByWeek(String weekType);
 }

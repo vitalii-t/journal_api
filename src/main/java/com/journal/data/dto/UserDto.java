@@ -2,11 +2,13 @@ package com.journal.data.dto;
 
 import com.journal.data.entities.Role;
 import com.journal.data.entities.User;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Set;
 
 @Data
+@ApiModel
 public class UserDto {
 
     private Long id;
@@ -16,7 +18,7 @@ public class UserDto {
     private Set<Role> roles;
 
     public UserDto(User entity) {
-        id = entity.getId();
+        id = entity.getNumberInGroupList();
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
         email = entity.getEmail();

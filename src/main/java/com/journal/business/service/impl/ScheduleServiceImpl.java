@@ -22,11 +22,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Week> findScheduleByWeek(String subjectName, String weekType) {
-        if (subjectName != null && !subjectName.isEmpty()) {
-            return weekRepository.findBySubjectNameContainsAndWeekType(subjectName, weekType);
-        } else {
-            return weekRepository.findByWeekType(weekType);
-        }
+    public List<Week> findScheduleByWeek(String weekType) {
+        return weekRepository.findByWeekType(weekType);
     }
 }

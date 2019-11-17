@@ -5,14 +5,59 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="entities_creation" author="v.tasun">
         <createTable tableName="group">
-            <column name="id" type="integer"/>
-            <column name="identifier" type="character varying (255)"/>
-            <column name="id" type="integer"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="identifier" type="character varying (55)"/>
+            <column name="users" type="bigint"/>
             <column name="id" type="integer"/>
         </createTable>
-        <sql>
-
-        </sql>
+        <createTable tableName="users">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="character varying(70)"/>
+            <column name="last_name" type="character varying(70)"/>
+            <column name="username" type="character varying(70)"/>
+            <column name="password" type="character varying(100)"/>
+            <column name="list_number" type="bigint"/>
+            <column name="activation_code" type="character varying(255)"/>
+            <column name="email" type="character varying(60)"/>
+            <column name="group_id" type="bigint"/>
+            <column name="roles" type="bigint"/>
+        </createTable>
+        <createTable tableName="week">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="lesson_index" type="bigint"/>
+            <column name="week_day" type="bigint"/>
+            <column name="subject_name" type="character varying(20)"/>
+            <column name="lesson_index" type="character varying(20)"/>
+        </createTable>
+        <createTable tableName="schedule">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="begin_time" type="time"/>
+            <column name="end_time" type="time"/>
+        </createTable>
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint"/>
+            <column name="role" type="character_varying(20)"/>
+        </createTable>
     </changeSet>
+    <changeSet id="foreign_keys_adding" author="v.tasun">
+        <addForeignKeyConstraint baseTableName="group"
+                                 baseColumnNames="users"
+                                 constraintName="group_users_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
 
+        <addForeignKeyConstraint baseTableName="user"
+                                 baseColumnNames="roles"
+                                 constraintName="role_users_fk"
+                                 referencedTableName="user_role"
+                                 referencedColumnNames="user_id"/>
+    </changeSet>
 </databaseChangeLog>

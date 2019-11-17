@@ -1,11 +1,13 @@
 package com.journal.data.dto;
 
 import com.journal.data.entities.Week;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@ApiModel
 public class WeekDto {
 
     private Long index;

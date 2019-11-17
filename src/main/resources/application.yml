@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
+    change-log: classpath:data/changelog/db.changelog-master.xml
+  mail:
+    #    host: smtp.gmail.com
+    #    username: vetvet99@gmail.com
+    #    password: 765232wersxcd
+    #    port: 465
+    #    protocol: smtps
+    host: smtp.yandex.ru
+    username: tank.33@yandex.ru
+    password: 765232wersxcd
+    port: 465
+    protocol: smtps
+jwt:
+  token:
+    secret: Journal
+    duration: 1000000000
