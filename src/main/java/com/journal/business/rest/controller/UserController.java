@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
-@CrossOrigin(origins = "https://journal-project.herokuapp.com/")
+@CrossOrigin
 @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT')")
 public class UserController {
 

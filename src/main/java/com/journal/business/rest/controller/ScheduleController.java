@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/schedule")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://journal-project.herokuapp.com/")
+@CrossOrigin
 @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT','APPROVED')")
 public class ScheduleController {
 

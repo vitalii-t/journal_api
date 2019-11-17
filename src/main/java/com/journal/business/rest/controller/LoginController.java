@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://journal-project.herokuapp.com/")
+@CrossOrigin
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
