@@ -21,7 +21,7 @@ public class BaseResponse<T> {
     /**
      * The http response code
      */
-    private int responseCode;
+    private int responseCode = 200;
     /**
      * Data to transfer
      */
@@ -42,6 +42,16 @@ public class BaseResponse<T> {
      */
     public BaseResponse(T data) {
         this.data = data;
+    }
+
+    /**
+     * Constructs a new response with the given data object
+     * @param data data to transfer
+     * @param responseCode response code
+     */
+    public BaseResponse(T data, int responseCode) {
+        this.data = data;
+        this.responseCode = responseCode;
     }
 
     /**

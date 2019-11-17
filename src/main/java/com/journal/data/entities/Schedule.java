@@ -21,4 +21,5 @@ public class Schedule {
 
     @Column(name = "end_time")
     private LocalTime end;
+
 }

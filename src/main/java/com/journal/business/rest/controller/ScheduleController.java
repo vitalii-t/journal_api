@@ -6,10 +6,13 @@ import com.journal.data.dto.WeekDto;
 import com.journal.data.dto.WeekTypeEnum;
 import com.journal.data.entities.Schedule;
 import com.journal.data.entities.Week;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,20 +20,34 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/schedule")
 @RequiredArgsConstructor
+@CrossOrigin
+@PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT','APPROVED')")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
     @GetMapping("/time")
+    @ApiOperation("get time schedule")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully get all time schedule"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     public BaseResponse<List<Schedule>> allSchedule() {
-        return new BaseResponse<>(scheduleService.findAll());
+        return new BaseResponse<>(scheduleService.findAll(), HttpStatus.OK.value());
     }
 
     @GetMapping
-    public BaseResponse<List<WeekDto>> subjectsSchedule(String subjectName, WeekTypeEnum weekType) {
-        List<Week> schedule = scheduleService.findScheduleByWeek(subjectName, weekType.name().toLowerCase());
+    @ApiOperation("get schedule for specified week")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully get all subjects"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
+    public BaseResponse<List<WeekDto>> subjectsSchedule(@RequestParam(value = "ODD") WeekTypeEnum weekType) {
+        List<Week> schedule = scheduleService.findScheduleByWeek(weekType.name().toLowerCase());
         return new BaseResponse<>(schedule.stream()
                 .map(WeekDto::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), HttpStatus.OK.value());
     }
 }

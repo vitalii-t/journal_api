@@ -43,20 +43,19 @@ insert into week values (19,'п`ятниця',3,'Digital signal processing (пр
 
 insert into groups values ( 1, 'CI-161' );
 
-insert into users values (1,'null',true,'email@gmail.com','Виталий','Тасун',
-                          '$2a$08$G8w2cGL4zOdQxStNbPVhde.ZeC0TmfojLxdcTc5eukSkl8bQwmvvO','mind0wner',1);
+-- insert into users values (1,'null',true,'email@gmail.com','Vitalii','Tasun',1,
+--                           '$2a$08$G8w2cGL4zOdQxStNbPVhde.ZeC0TmfojLxdcTc5eukSkl8bQwmvvO','mind0wner',1);
+-- insert into users values (2,'null',true,'ex@gmail.com','Андрей','Нечипорук', 2,
+--                           '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u1',1);
 --
-insert into users values (2,'null',true,'ex@gmail.com','Андрей','Нечипорук',
-                          '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u1',1);
-
-insert into users values (3,'null',true,'amp2@gmail.com','Андрей','Колесник',
-                          '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u2',1);
-
-insert into users values (4,'null',true,'amp3@gmail.com','Староста','Старостовна',
-                          '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u3',1);
-
-insert into users values (5,'null',true,'amp43@gmail.com','Староста','Старостовна',
-                          '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u3',1);
+-- insert into users values (3,'null',true,'amp2@gmail.com','Андрей','Колесник',3,
+--                           '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u2',1);
+--
+-- insert into users values (4,'null',true,'amp3@gmail.com','Староста','Старостовна',4,
+--                           '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u3',1);
+--
+-- insert into users values (5,'null',true,'amp43@gmail.com','Староста','Старостовна',5,
+--                           '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u3',1);
 
 -- insert into users values (4,true,'le@gmail.com','Dmitriy','Senchuk','qwe','sen4',1);
 -- insert into users values (5,true,'exam@gmail.com','Vasilii','Petrov','qwe','VasPet',1);
@@ -65,12 +64,12 @@ insert into users values (5,'null',true,'amp43@gmail.com','Староста','С
 -- insert into users values (7,true,'mail@gmail.com','James','Harden','qwe','beard',1);
 -- insert into users values (8,true,'123@gmail.com','Damian','Lillard','qwe','time',1);
 
-insert into user_role values ( 1,'ADMIN' );
-insert into user_role values ( 1,'MONITOR' );
-insert into user_role values ( 2,'MONITOR' );
-insert into user_role values ( 3,'STUDENT' );
-insert into user_role values ( 4,'APPROVED' );
-insert into user_role values ( 5,'ANON' );
+-- insert into user_role values ( 1,'ADMIN' );
+-- insert into user_role values ( 1,'MONITOR' );
+-- insert into user_role values ( 2,'MONITOR' );
+-- insert into user_role values ( 3,'STUDENT' );
+-- insert into user_role values ( 4,'APPROVED' );
+-- insert into user_role values ( 5,'ANON' );
 -- insert into user_role values ( 4,'STUDENT' );
 -- insert into user_role values ( 5,'STUDENT' );
 -- insert into user_role values ( 6,'STUDENT' );

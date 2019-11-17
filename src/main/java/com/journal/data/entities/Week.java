@@ -25,4 +25,5 @@ public class Week {
 
     @Column(name = "week_day")
     private String dayOfTheWeek;
+
 }

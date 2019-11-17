@@ -2,6 +2,7 @@ package com.journal.data.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -9,8 +10,9 @@ import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @Entity
+@ToString
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -28,8 +30,8 @@ public class User {
 
     private String password;
 
-    @Transient
-    private String passwordConfirmation;
+    @Column(name = "list_number")
+    private Long numberInGroupList;
 
     @Column(name = "activation_code")
     private String activationCode;
@@ -51,4 +53,11 @@ public class User {
 
     private boolean active;
 
+    public User(String firstName, String lastName, String username, String password, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 }
