@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "https://journal-project.herokuapp.com/")
 public class RegistrationController {
 
     private final UserService userService;

@@ -4,13 +4,11 @@ import com.journal.business.rest.BaseResponse;
 import com.journal.business.service.UserService;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
-import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "https://journal-project.herokuapp.com/")
 @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT')")
 public class UserController {
 
