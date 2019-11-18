@@ -1,8 +1,8 @@
 create table week
 (
-    id           serial primary key not null,
-    week_day     character varying(100),
+    id           bigint primary key not null,
+    week_day     varchar(100),
     lesson_index bigint,
-    subject_name character varying(100),
-    week_type    character varying(100)
+    subject_name varchar(100),
+    week_type    varchar(100)
 )

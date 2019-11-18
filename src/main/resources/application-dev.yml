@@ -9,9 +9,9 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:db/migrations/db.changelog-master.yaml
   mail:
     #    host: smtp.gmail.com

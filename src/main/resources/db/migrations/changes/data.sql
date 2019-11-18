@@ -81,9 +81,9 @@ insert into users(id, activation_code, active, email, first_name, last_name, lis
 values (3, 'null', true, 'amp2@gmail.com', 'Андрей', 'Колесник', 3,
         '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe', 'u2', 1);
 
-insert into user_role
+insert into user_role(user_id, roles)
 values (1, 'ADMIN');
-insert into user_role
+insert into user_role(user_id, roles)
 values (2, 'MONITOR');
-insert into user_role
+insert into user_role(user_id, roles)
 values (3, 'STUDENT');
