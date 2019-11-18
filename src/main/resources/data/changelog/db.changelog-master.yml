@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      validCheckSum: ANY
+      id: predefined_data
+      author: v.tasun
+      preConditions:
+        - onFail: HALT
+      changes:
+        - sqlFile:
+            dbms: postgres
+            encoding: utf8
+            path: data/changelog/data.sql

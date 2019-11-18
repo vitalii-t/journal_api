@@ -54,13 +54,6 @@ insert into users values (3,'null',true,'amp2@gmail.com','Андрей','Кол�
 insert into users values (4,'null',true,'amp3@gmail.com','Староста','Старостовна',4,
                           '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u3',1);
 
--- insert into users values (4,true,'le@gmail.com','Dmitriy','Senchuk','qwe','sen4',1);
--- insert into users values (5,true,'exam@gmail.com','Vasilii','Petrov','qwe','VasPet',1);
--- insert into users values (6,true,'my@gmail.com','Pavel','Gerashchenko','qwe','pashgun',1);
---
--- insert into users values (7,true,'mail@gmail.com','James','Harden','qwe','beard',1);
--- insert into users values (8,true,'123@gmail.com','Damian','Lillard','qwe','time',1);
-
 insert into user_role values (1,'ADMIN');
 insert into user_role values (2,'MONITOR');
 insert into user_role values (3,'STUDENT');

@@ -4,7 +4,6 @@ import com.journal.business.service.MailSender;
 import com.journal.business.service.UserService;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
-import com.journal.data.entities.Group;
 import com.journal.data.entities.Role;
 import com.journal.data.entities.User;
 import com.journal.data.exceptions.UserNotFoundException;
@@ -60,7 +59,7 @@ public class UserServiceImpl implements UserService {
                     "Hello, %s! \n" +
                             "Welcome to CI-161's group site. \n" +
                             "If you don`t want just ignore message. \n" +
-                            "Please, visit next link: http://localhost:8080/activate/%s",
+                            "Please, visit next link: https://api-journal.herokuapp.com/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
