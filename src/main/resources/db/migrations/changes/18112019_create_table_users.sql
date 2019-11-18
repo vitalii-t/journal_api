@@ -11,7 +11,6 @@ create table users
     group_id        bigint             not null,
     roles           bigint             not null,
 
-    constraint user_role_fk foreign key (roles) references user_role (user_id),
     constraint user_group_fk foreign key (group_id) references groups (id)
 
 )

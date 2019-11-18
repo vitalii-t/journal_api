@@ -17,13 +17,13 @@ databaseChangeLog:
             path: db/migrations/changes/18112019_create_table_week.sql
         - sqlFile:
             encoding: utf8
-            path: db/migrations/changes/18112019_create_user_role_table.sql
+            path: /db/migrations/changes/18112019_create_table_users.sql
         - sqlFile:
             encoding: utf8
-            path: /db/migrations/changes/18112019_create_table_users.sql
+            path: db/migrations/changes/18112019_create_table_user_role.sql
   - changeSet:
       validCheckSum: ANY
-      id: 20191031_predefined_data
+      id: 18112019_predefined_data
       author: v.tasun
       preConditions:
         - onFail: HALT

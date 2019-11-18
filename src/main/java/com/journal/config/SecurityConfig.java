@@ -40,11 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity security) throws Exception {
 
         security.
-                httpBasic().disable()
+                headers().frameOptions().disable()
+                .and()
+                .httpBasic().disable()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(LOGIN).permitAll()
                 .antMatchers("/activate/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
