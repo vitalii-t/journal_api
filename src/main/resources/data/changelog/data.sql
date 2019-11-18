@@ -51,10 +51,6 @@ insert into users values (2,'null',true,'ex@gmail.com','Андрей','Нечи�
 insert into users values (3,'null',true,'amp2@gmail.com','Андрей','Колесник',3,
                           '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u2',1);
 
-insert into users values (4,'null',true,'amp3@gmail.com','Староста','Старостовна',4,
-                          '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe','u3',1);
-
 insert into user_role values (1,'ADMIN');
 insert into user_role values (2,'MONITOR');
 insert into user_role values (3,'STUDENT');
-insert into user_role values (4,'APPROVED');

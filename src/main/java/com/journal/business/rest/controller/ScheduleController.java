@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/schedule")
 @RequiredArgsConstructor
 @CrossOrigin
-@PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT','APPROVED')")
+@PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT')")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
