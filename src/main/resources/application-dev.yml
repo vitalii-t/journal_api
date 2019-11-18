@@ -12,17 +12,18 @@ spring:
       ddl-auto: update
   liquibase:
     enabled: false
+    change-log: classpath:db/migrations/db.changelog-master.yaml
   mail:
-#    host: smtp.gmail.com
-#    username: vetvet99@gmail.com
-#    password: 765232wersxcd
-#    port: 465
-#    protocol: smtps
-     host: smtp.yandex.ru
-     username: tank.33@yandex.ru
-     password: 765232wersxcd
-     port: 465
-     protocol: smtps
+    #    host: smtp.gmail.com
+    #    username: vetvet99@gmail.com
+    #    password: 765232wersxcd
+    #    port: 465
+    #    protocol: smtps
+    host: smtp.yandex.ru
+    username: tank.33@yandex.ru
+    password: 765232wersxcd
+    port: 465
+    protocol: smtps
 
 jwt:
   token:
