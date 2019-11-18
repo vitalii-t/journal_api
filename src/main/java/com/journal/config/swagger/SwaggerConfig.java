@@ -26,7 +26,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .protocols(new HashSet<>(Arrays.asList("http", "https")))
+                .protocols(new HashSet<>(Arrays.asList("https")))
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
