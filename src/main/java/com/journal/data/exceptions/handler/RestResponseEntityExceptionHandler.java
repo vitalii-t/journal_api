@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String ERROR_NOT_FOUND_BY_ID = "Resource with such id not found!";
-    private static final String ERROR_BAD_CREDENTIALS = "Invalid username or password!";
+    private static final String ERROR_BAD_CREDENTIALS = "Check your username and password!";
     private static final String ERROR_NOT_FOUND_USERNAME = "User with such username not found!";
     private static final String ERROR_VALIDATE_DATA = "Received incorrect data.";
 

@@ -4,7 +4,7 @@ spring:
       ddl-auto: update
   liquibase:
     enabled: true
-    change-log: classpath:data/changelog/db.changelog-master.yml
+    change-log: classpath:data/changelog/db.changelog-master.xml
   mail:
     #    host: smtp.gmail.com
     #    username: vetvet99@gmail.com
