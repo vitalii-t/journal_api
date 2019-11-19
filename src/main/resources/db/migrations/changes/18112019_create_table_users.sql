@@ -14,4 +14,4 @@ create table users
     constraint user_group_fk foreign key (group_id) references groups (id)
 
 );
-create sequence user_seq start with 1 increment by 1;
+create sequence user_seq start with 4 increment by 1;

@@ -70,15 +70,15 @@ values ( 19,'п`ятниця', 3, 'Цифрова обробка сигналі�
 insert into groups(id, identifier)
 values (1,'CI-161');
 
-insert into users(activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
-values ('null', true, 'email@gmail.com', 'Vitalii', 'Tasun', 1,
+insert into users(id,activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
+values (1,'null', true, 'email@gmail.com', 'Vitalii', 'Tasun', 1,
         '$2a$08$G8w2cGL4zOdQxStNbPVhde.ZeC0TmfojLxdcTc5eukSkl8bQwmvvO', 'mind0wner', 1);
-insert into users(activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
-values ('null', true, 'ex@gmail.com', 'Андрей', 'Нечипорук', 2,
+insert into users(id,activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
+values (2,'null', true, 'ex@gmail.com', 'Андрей', 'Нечипорук', 2,
         '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe', 'u1', 1);
 
-insert into users(activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
-values ('null', true, 'amp2@gmail.com', 'Андрей', 'Колесник', 3,
+insert into users(id,activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
+values (3,'null', true, 'amp2@gmail.com', 'Андрей', 'Колесник', 3,
         '$2a$08$mPFtOkyYRQc/LNwPb0E.LO2HnjSkl/FMYKVjsrjYIIy9uwEWlbUVe', 'u2', 1);
 
 insert into user_role(user_id, roles)
