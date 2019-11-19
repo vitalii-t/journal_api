@@ -6,7 +6,7 @@ create table users
     email           varchar(100),
     first_name      varchar(70),
     last_name       varchar(70),
-    list_number     serial,
+    list_number     bigint,
     password        varchar(70),
     username        varchar(70),
     group_id        bigint,
