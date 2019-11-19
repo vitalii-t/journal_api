@@ -12,5 +12,4 @@ create table users
     group_id        bigint,
 
     constraint user_group_fk foreign key (group_id) references groups (id)
-
-);
+)

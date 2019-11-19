@@ -1,1 +1,0 @@
-alter table users alter column id type bigint using cast(id as bigint)
