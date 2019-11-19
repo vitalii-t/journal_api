@@ -11,7 +11,7 @@ spring:
     hibernate:
       ddl-auto: validate
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:db/migrations/db.changelog-master.yaml
   mail:
     #    host: smtp.gmail.com
