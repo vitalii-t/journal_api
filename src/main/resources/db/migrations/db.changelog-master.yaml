@@ -24,9 +24,6 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: db/migrations/changes/19112019_create_user_sequence.sql
-        - sqlFile:
-            encoding: utf8
-            path: db/migrations/changes/19112019_update_user_id_data_type.sql
   - changeSet:
       validCheckSum: ANY
       id: 18112019_predefined_data
@@ -37,3 +34,13 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: /db/migrations/changes/data.sql
+  - changeSet:
+      validCheckSum: ANY
+      id: 19112019_updating_user_id
+      author: v.tasun
+      preConditions:
+        - onFail: HALT
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: db/migrations/changes/19112019_update_user_id_data_type.sql
