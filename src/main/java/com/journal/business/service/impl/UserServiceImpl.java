@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
             );
             mailSender.send(user.getEmail(), "Activation code", message);
         }
-
         return true;
     }
 

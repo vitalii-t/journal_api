@@ -47,6 +47,7 @@ public class LoginController {
             Map<String, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", "Bearer_"+token);
+            response.put("roles", user.getRoles());
 
             return new BaseResponse<>(response, HttpStatus.OK.value());
         } catch (AuthenticationException e) {
