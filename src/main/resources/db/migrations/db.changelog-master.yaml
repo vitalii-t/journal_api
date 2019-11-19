@@ -24,6 +24,9 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: db/migrations/changes/19112019_create_user_sequence.sql
+        - sqlFile:
+            encoding: utf8
+            path: db/migrations/changes/19112019_update_user_id_data_type.sql
   - changeSet:
       validCheckSum: ANY
       id: 18112019_predefined_data
