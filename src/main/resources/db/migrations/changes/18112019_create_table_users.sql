@@ -1,6 +1,6 @@
 create table users
 (
-    id              serial primary key not null,
+    id              bigint primary key not null,
     activation_code varchar(255),
     active          boolean,
     email           varchar(100),
