@@ -17,58 +17,58 @@ values (7, '16:25', '17:45');
 
 -- odd week
 
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ('понеділок', 0, 'вільниий день', 'odd');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (1,'понеділок', 0, 'вільниий день', 'odd');
 
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('вівторок', 1, 'Моделювання(лек)', 'odd');
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ('вівторок', 2, 'ВКС (лек)', 'odd');
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('вівторок', 3, 'ЦОС(лек)', 'odd');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (2,'вівторок', 1, 'Моделювання(лек)', 'odd');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (3,'вівторок', 2, 'ВКС (лек)', 'odd');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (4,'вівторок', 3, 'ЦОС(лек)', 'odd');
 
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('середа', 1, 'WEB-технології (пр)', 'odd');
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ('середа', 2, 'Цифрова обробка сигналів (пр)', 'odd');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (5,'середа', 1, 'WEB-технології (пр)', 'odd');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (6,'середа', 2, 'Цифрова обробка сигналів (пр)', 'odd');
 
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ('четвер', 1, 'ТПП (пр)', 'odd');
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('четвер', 2, 'ТПП (лек)', 'odd');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (7,'четвер', 1, 'ТПП (пр)', 'odd');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (8,'четвер', 2, 'ТПП (лек)', 'odd');
 
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('п`ятниця', 2, 'WEB-технології (лек)', 'odd');
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ('п`ятниця', 3, 'Іноземна мова', 'odd');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (9,'п`ятниця', 2, 'WEB-технології (лек)', 'odd');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (10,'п`ятниця', 3, 'Іноземна мова', 'odd');
 
 -- EVEN WEEK SCHEDULE
 
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('понеділок', 0, 'вільний день', 'even');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (11,'понеділок', 0, 'вільний день', 'even');
 
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ( 'вівторок', 2, 'Modelling(лек)', 'even');
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ('вівторок', 3, 'ВКС (лек)', 'even');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (12, 'вівторок', 2, 'Modelling(лек)', 'even');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values (13,'вівторок', 3, 'ВКС (лек)', 'even');
 
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ( 'середа', 1, 'Programming technology (лек)', 'even');
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ( 'середа', 2, 'WEB-technology (лек)', 'even');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values ( 14,'середа', 1, 'Programming technology (лек)', 'even');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values ( 15,'середа', 2, 'WEB-technology (лек)', 'even');
 
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ( 'четвер', 1, 'Modelling (пр)', 'even');
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ( 'четвер', 2, 'Цифрова обробка сигналів (лек)', 'even');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values ( 16,'четвер', 1, 'Modelling (пр)', 'even');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (17, 'четвер', 2, 'Цифрова обробка сигналів (лек)', 'even');
 
-insert into week(week_day, lesson_index, subject_name, week_type)
-values ( 'п`ятниця', 2, 'ВКС (пр)', 'even');
-insert into week( week_day, lesson_index, subject_name, week_type)
-values ( 'п`ятниця', 3, 'Цифрова обробка сигналів (пр)', 'even');
+insert into week(id,week_day, lesson_index, subject_name, week_type)
+values (18, 'п`ятниця', 2, 'ВКС (пр)', 'even');
+insert into week(id, week_day, lesson_index, subject_name, week_type)
+values ( 19,'п`ятниця', 3, 'Цифрова обробка сигналів (пр)', 'even');
 
-insert into groups
-values ('CI-161');
+insert into groups(id, identifier)
+values (1,'CI-161');
 
 insert into users(activation_code, active, email, first_name, last_name, list_number, password, username, group_id)
 values ('null', true, 'email@gmail.com', 'Vitalii', 'Tasun', 1,
