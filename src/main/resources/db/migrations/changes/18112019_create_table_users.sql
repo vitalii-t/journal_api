@@ -1,12 +1,12 @@
 create table users
 (
-    id              bigint primary key not null,
+    id              serial primary key not null,
     activation_code varchar(255),
     active          boolean,
     email           varchar(100),
     first_name      varchar(70),
     last_name       varchar(70),
-    list_number     bigint,
+    list_number     serial,
     password        varchar(70),
     username        varchar(70),
     group_id        bigint,
