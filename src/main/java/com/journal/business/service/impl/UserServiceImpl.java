@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(Role.ANON));
         user.setActivationCode(UUID.randomUUID().toString());
-        userRepository.saveAndFlush(user);
+        userRepository.save(user);
         log.info("Saved new user {}", user.toString());
 
         if (!StringUtils.isEmpty(user.getEmail())) {
