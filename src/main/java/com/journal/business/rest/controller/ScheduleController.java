@@ -44,7 +44,8 @@ public class ScheduleController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public BaseResponse<List<WeekDto>> subjectsSchedule(@RequestParam(value = "ODD") WeekTypeEnum weekType) {
+    public BaseResponse<List<WeekDto>> subjectsSchedule(@RequestParam(value = "week_type",
+            defaultValue = "ODD") WeekTypeEnum weekType) {
         List<Week> schedule = scheduleService.findScheduleByWeek(weekType.name().toLowerCase());
         return new BaseResponse<>(schedule.stream()
                 .map(WeekDto::new)

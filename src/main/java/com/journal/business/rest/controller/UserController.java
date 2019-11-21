@@ -42,4 +42,11 @@ public class UserController {
         return new BaseResponse<>();
     }
 
+    @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR')")
+    public BaseResponse<HttpStatus> deleteUser(@PathVariable Long id){
+        userService.delete(id);
+        return new BaseResponse<>(HttpStatus.OK);
+    }
+
 }

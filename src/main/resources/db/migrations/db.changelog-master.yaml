@@ -14,16 +14,16 @@ databaseChangeLog:
             path: db/migrations/changes/18112019_create_table_schedule.sql
         - sqlFile:
             encoding: utf8
-            path: db/migrations/changes/18112019_create_table_week.sql
+            path: db/migrations/changes/18112019_create_table_user_role.sql
         - sqlFile:
             encoding: utf8
             path: /db/migrations/changes/18112019_create_table_users.sql
         - sqlFile:
             encoding: utf8
-            path: db/migrations/changes/18112019_create_table_user_role.sql
+            path: db/migrations/changes/18112019_create_table_week.sql
         - sqlFile:
             encoding: utf8
-            path: db/migrations/changes/19112019_create_user_sequence.sql
+            path: db/migrations/changes/21112019_add_constraints.sql
   - changeSet:
       validCheckSum: ANY
       id: 18112019_predefined_data

@@ -1,5 +1,6 @@
 create table groups
 (
-    id         serial primary key not null,
-    identifier varchar(15)
+    id         bigserial not null,
+    identifier varchar(255),
+    primary key (id)
 )

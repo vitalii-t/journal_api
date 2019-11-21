@@ -3,15 +3,16 @@ spring:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:Journal
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/journal
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+    show-sql: true
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:db/migrations/db.changelog-master.yaml
   mail:
     #    host: smtp.gmail.com
