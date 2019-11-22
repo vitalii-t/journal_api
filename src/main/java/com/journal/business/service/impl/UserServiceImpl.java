@@ -1,7 +1,9 @@
 package com.journal.business.service.impl;
 
+import com.journal.business.service.AuthenticatedUser;
 import com.journal.business.service.MailSender;
 import com.journal.business.service.UserService;
+import com.journal.data.dto.CurrentUserDto;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
 import com.journal.data.entities.Role;
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
     private final MailSender mailSender;
+    private final AuthenticatedUser authenticatedUser;
 
     public List<UserDto> findAll() {
         log.info("Retrieving all users");
@@ -115,6 +118,11 @@ public class UserServiceImpl implements UserService {
     public User findUserByUsername(String username) {
         log.info("Retrieving user by username {}", username);
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public CurrentUserDto getCurrentUser() {
+        return new CurrentUserDto(authenticatedUser.getAuthenticatedUser());
     }
 
 }

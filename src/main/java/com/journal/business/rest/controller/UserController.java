@@ -2,6 +2,7 @@ package com.journal.business.rest.controller;
 
 import com.journal.business.rest.BaseResponse;
 import com.journal.business.service.UserService;
+import com.journal.data.dto.CurrentUserDto;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @AllArgsConstructor
 @CrossOrigin
 @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT')")
@@ -35,6 +36,12 @@ public class UserController {
         return new BaseResponse<>(userService.findAll(), HttpStatus.OK.value());
     }
 
+    @ApiOperation("Get one user by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully get one user"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @PostMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR')")
     public BaseResponse<Void> updateUser(@PathVariable Long id, @RequestBody @Valid UpdateUserDto request) {
@@ -42,11 +49,24 @@ public class UserController {
         return new BaseResponse<>();
     }
 
+    @ApiOperation("Delete one user by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully delete user"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
     @DeleteMapping(path = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR')")
     public BaseResponse<HttpStatus> deleteUser(@PathVariable Long id){
         userService.delete(id);
         return new BaseResponse<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/current")
+
+    public BaseResponse<CurrentUserDto> getCurrentUser(){
+
+        return new BaseResponse<>(userService.getCurrentUser(), HttpStatus.OK.value());
     }
 
 }

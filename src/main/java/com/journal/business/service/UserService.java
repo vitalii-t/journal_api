@@ -1,5 +1,6 @@
 package com.journal.business.service;
 
+import com.journal.data.dto.CurrentUserDto;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
 import com.journal.data.entities.User;
@@ -66,4 +67,5 @@ public interface UserService {
     User findUserByUsername(String username);
 
 
+    CurrentUserDto getCurrentUser();
 }

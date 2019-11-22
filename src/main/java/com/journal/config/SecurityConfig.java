@@ -1,5 +1,6 @@
 package com.journal.config;
 
+import com.google.common.collect.ImmutableList;
 import com.journal.security.JwtConfigurer;
 import com.journal.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -40,11 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity security) throws Exception {
 
         security.
-                headers().frameOptions().disable()
-                .and()
-                .httpBasic().disable()
-                .csrf().disable()
-                .authorizeRequests()
+                authorizeRequests()
                 .antMatchers(LOGIN).permitAll()
                 .antMatchers("/activate/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
@@ -53,28 +50,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .exceptionHandling()
+                .and()
                 .logout()
                 .logoutSuccessUrl(LOGIN)
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
-    }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+        security
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
+                .csrf().disable();
     }
 
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(ImmutableList.of("*"));
+        configuration.setAllowedMethods(ImmutableList.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(ImmutableList.of("Authorization", "Content-Type", "Cache-Control", "Refresh", "Origin"));
+        configuration.setExposedHeaders(ImmutableList.of("Access-Control-Allow-Origin"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
 }
