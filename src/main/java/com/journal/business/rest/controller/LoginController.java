@@ -15,6 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class LoginController {
 
     @PostMapping
     @ApiOperation("Endpoint to login")
-    public BaseResponse login(@RequestBody LoginDto request) {
+    public BaseResponse login(@RequestBody @Valid LoginDto request) {
 
         try {
             String username = request.getUsername();

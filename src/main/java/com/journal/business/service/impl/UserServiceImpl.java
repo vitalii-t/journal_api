@@ -13,6 +13,7 @@ import com.journal.data.repository.GroupRepository;
 import com.journal.data.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
         user.setGroup(groupRepository.getOne(1L));
         user.setActivationCode(null);
-
+        user.setNumberInGroupList(user.getId());
         user.getRoles().clear();
         user.getRoles().add(Role.STUDENT);
 
@@ -91,14 +92,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UpdateUserDto dto, Long id) {
-        User user = findById(id);
-        user.getRoles().clear();
-        user.setRoles(new HashSet<>(dto.getRoles()));
-        user.setUsername(dto.getUsername());
-        user.setEmail(dto.getEmail());
-        user.setNumberInGroupList(dto.getId());
-
+        User user = userRepository.findByNumberInGroupList(id);
+        if(user!=null) {
+            user.getRoles().clear();
+            user.setRoles(new HashSet<>(dto.getRoles()));
+            user.setUsername(dto.getUsername());
+            user.setEmail(dto.getEmail());
+            user.setNumberInGroupList(dto.getId());
         userRepository.saveAndFlush(user);
+        }
+        else {
+            throw new ResourceNotFoundException("User with such number in group list not found!");
+        }
     }
 
     @Override
@@ -112,7 +117,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         log.info("Deleting user with id {}", id);
-        userRepository.deleteById(id);
+        userRepository.deleteByNumberInGroupList(id);
     }
 
     public User findUserByUsername(String username) {

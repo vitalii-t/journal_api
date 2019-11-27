@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
@@ -19,6 +20,8 @@ public class UpdateUserDto {
     private Long id;
 
     @NotNull(message = "Username should not be empty")
+    @Pattern(regexp = "[a-zA-Z\\-_0-9]+",
+            message = "Username can contain only english letters, numbers, _, -")
     private String username;
 
     @NotNull(message = "Email should not be empty")

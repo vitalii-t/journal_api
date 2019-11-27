@@ -3,6 +3,7 @@ package com.journal.config;
 import com.google.common.collect.ImmutableList;
 import com.journal.security.JwtConfigurer;
 import com.journal.security.JwtTokenProvider;
+import com.journal.security.TokenAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGIN = "/login";
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final TokenAuthenticationEntryPoint tokenAuthenticationEntryPoint;
 
     @Override
     public void configure(WebSecurity web) {
@@ -54,6 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl(LOGIN)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(tokenAuthenticationEntryPoint)
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
 
