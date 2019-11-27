@@ -30,6 +30,7 @@ public class ScheduleController {
     @ApiOperation("get time schedule")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully get all time schedule"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
@@ -41,6 +42,7 @@ public class ScheduleController {
     @ApiOperation("get schedule for specified week")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully get all subjects"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })

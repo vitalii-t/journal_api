@@ -29,6 +29,7 @@ public class UserController {
     @ApiOperation(value = "Returns all available users")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully get all users"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
@@ -36,9 +37,10 @@ public class UserController {
         return new BaseResponse<>(userService.findAll(), HttpStatus.OK.value());
     }
 
-    @ApiOperation("Get one user by id")
+    @ApiOperation("Update one user by id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully get one user"),
+            @ApiResponse(code = 200, message = "Successfully update one user"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
@@ -52,6 +54,7 @@ public class UserController {
     @ApiOperation("Delete one user by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully delete user"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
@@ -63,7 +66,6 @@ public class UserController {
     }
 
     @GetMapping("/current")
-
     public BaseResponse<CurrentUserDto> getCurrentUser(){
 
         return new BaseResponse<>(userService.getCurrentUser(), HttpStatus.OK.value());

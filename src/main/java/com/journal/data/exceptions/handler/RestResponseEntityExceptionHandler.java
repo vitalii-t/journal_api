@@ -8,6 +8,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -31,6 +32,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     private static final String ERROR_BAD_CREDENTIALS = "Check your username and password!";
     private static final String ERROR_NOT_FOUND_USERNAME = "User with such username not found!";
     private static final String ERROR_VALIDATE_DATA = "Received incorrect data.";
+    private static final String UNAUTHORIZED = "Unauthorized";
 
     @ExceptionHandler(UserNotFoundException.class)
     protected ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception,
@@ -97,6 +99,20 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, responseBody, new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED, request);
     }
 
+    @ExceptionHandler(AuthenticationServiceException.class)
+    protected ResponseEntity<Object> handleAuthenticationServiceException(AuthenticationServiceException exception, WebRequest request) {
+        log.error(exception.getMessage());
+
+        ResponseBody responseBody = ResponseBody.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .message(UNAUTHORIZED)
+                .error(exception.getMessage())
+                .path(((ServletWebRequest) request).getRequest().getRequestURI())
+                .build();
+
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
