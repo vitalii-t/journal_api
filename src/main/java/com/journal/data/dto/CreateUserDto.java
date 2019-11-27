@@ -33,8 +33,7 @@ public class CreateUserDto {
     private String email;
 
     @NotNull(message = "Password should not be empty")
-    @Size(min = 6, message = "Password can't be smaller than 6 symbols")
-    @Pattern(regexp = "[^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$]+",
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$+",
             message = "Password should contain at least 1 upper-case letter, 1 lower-case letter, 1 number " +
                     "and be at least 8 symbols")
     private String password;
