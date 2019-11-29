@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -24,7 +25,7 @@ public class JwtUser implements UserDetails {
     private final String email;
     private final boolean enabled;
     private final Date lastPasswordResetDate;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private final GrantedAuthority authority;
 
     public JwtUser(
             Long id,
@@ -32,7 +33,8 @@ public class JwtUser implements UserDetails {
             String firstName,
             String lastName,
             String email,
-            String password, Collection<? extends GrantedAuthority> authorities,
+            String password,
+            GrantedAuthority authority,
             boolean enabled,
             Date lastPasswordResetDate
     ) {
@@ -42,7 +44,7 @@ public class JwtUser implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
+        this.authority = authority;
         this.enabled = enabled;
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
@@ -95,7 +97,7 @@ public class JwtUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return Collections.singletonList(authority);
     }
 
     @Override

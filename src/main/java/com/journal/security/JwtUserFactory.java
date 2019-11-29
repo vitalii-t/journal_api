@@ -30,16 +30,13 @@ public final class JwtUserFactory {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                mapToGrantedAuthorities(new ArrayList<>(user.getRoles())),
+                mapToGrantedAuthorities(user.getRole()),
                 user.isActive(),
                 new Date()
         );
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
-        return userRoles.stream()
-                .map(role ->
-                        new SimpleGrantedAuthority(role.name())
-                ).collect(Collectors.toList());
+    private static GrantedAuthority mapToGrantedAuthorities(Role userRole) {
+        return new SimpleGrantedAuthority(userRole.name());
     }
 }

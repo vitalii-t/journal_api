@@ -1,7 +1,7 @@
 package com.journal.security;
 
 import com.journal.data.entities.Role;
-import com.journal.data.exceptions.JwtAuthenticationException;
+import com.journal.exceptions.JwtAuthenticationException;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Util class that provides methods for generation, validation and other operations with JWT token
@@ -49,10 +46,10 @@ public class JwtTokenProvider {
         return new BCryptPasswordEncoder();
     }
 
-    public String createToken(String username, Set<Role> roles) {
+    public String createToken(String username, Role role) {
 
         Claims claims = Jwts.claims().setSubject(username);
-        claims.put("roles", getRoleNames(roles));
+        claims.put("roles", role.name());
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
@@ -91,13 +88,6 @@ public class JwtTokenProvider {
 
     private String getUsername(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
-    }
-
-    private List<String> getRoleNames(Set<Role> roles) {
-        return roles.stream()
-                .map(Enum::name)
-                .collect(Collectors.toList());
-
     }
 
 }

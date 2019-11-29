@@ -1,7 +1,7 @@
 package com.journal.security;
 
 import com.journal.data.entities.User;
-import com.journal.data.repository.UserRepository;
+import com.journal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
