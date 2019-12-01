@@ -1,8 +1,5 @@
 package com.journal.service.impl;
 
-import com.journal.service.AuthenticatedUser;
-import com.journal.service.MailSender;
-import com.journal.service.UserService;
 import com.journal.data.dto.CurrentUserDto;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
@@ -11,6 +8,9 @@ import com.journal.data.entities.User;
 import com.journal.exceptions.UserNotFoundException;
 import com.journal.repository.GroupRepository;
 import com.journal.repository.UserRepository;
+import com.journal.service.AuthenticatedUser;
+import com.journal.service.MailSender;
+import com.journal.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;

@@ -68,7 +68,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(BadCredentialsException.class)
     protected ResponseEntity<Object> handleBadCredentialsException(BadCredentialsException exception,
-                                                                     WebRequest request) {
+                                                                   WebRequest request) {
         log.error(exception.getMessage());
 
         ResponseBody responseBody = ResponseBody.builder()
@@ -81,6 +81,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
+
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
                                                                          HttpHeaders headers,

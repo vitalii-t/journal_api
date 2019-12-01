@@ -4,9 +4,6 @@ import com.journal.data.entities.Role;
 import com.journal.data.entities.User;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 public class CurrentUserDto {
 
@@ -14,7 +11,7 @@ public class CurrentUserDto {
     private String lastName;
     private Role role;
 
-    public CurrentUserDto(User entity){
+    public CurrentUserDto(User entity) {
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.role = entity.getRole();

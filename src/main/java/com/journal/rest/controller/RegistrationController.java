@@ -1,9 +1,9 @@
 package com.journal.rest.controller;
 
-import com.journal.rest.BaseResponse;
-import com.journal.service.UserService;
 import com.journal.data.dto.CreateUserDto;
 import com.journal.data.entities.User;
+import com.journal.rest.BaseResponse;
+import com.journal.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

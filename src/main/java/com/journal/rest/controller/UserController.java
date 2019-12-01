@@ -1,10 +1,10 @@
 package com.journal.rest.controller;
 
-import com.journal.rest.BaseResponse;
-import com.journal.service.UserService;
 import com.journal.data.dto.CurrentUserDto;
 import com.journal.data.dto.UpdateUserDto;
 import com.journal.data.dto.UserDto;
+import com.journal.rest.BaseResponse;
+import com.journal.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -60,13 +60,13 @@ public class UserController {
     })
     @DeleteMapping(path = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR')")
-    public BaseResponse<HttpStatus> deleteUser(@PathVariable Long id){
+    public BaseResponse<HttpStatus> deleteUser(@PathVariable Long id) {
         userService.delete(id);
         return new BaseResponse<>(HttpStatus.OK);
     }
 
     @GetMapping("/current")
-    public BaseResponse<CurrentUserDto> getCurrentUser(){
+    public BaseResponse<CurrentUserDto> getCurrentUser() {
 
         return new BaseResponse<>(userService.getCurrentUser(), HttpStatus.OK.value());
     }

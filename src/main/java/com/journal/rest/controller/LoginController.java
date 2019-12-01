@@ -1,10 +1,10 @@
 package com.journal.rest.controller;
 
-import com.journal.rest.BaseResponse;
-import com.journal.service.UserService;
 import com.journal.data.dto.LoginDto;
 import com.journal.data.entities.User;
+import com.journal.rest.BaseResponse;
 import com.journal.security.JwtTokenProvider;
+import com.journal.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class LoginController {
             Map<String, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", "Bearer_" + token);
-            response.put("roles", user.getRole());
+            response.put("role", user.getRole());
 
             return new BaseResponse<>(response, HttpStatus.OK.value());
         } catch (AuthenticationException e) {

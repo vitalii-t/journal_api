@@ -46,7 +46,8 @@ public class BaseResponse<T> {
 
     /**
      * Constructs a new response with the given data object
-     * @param data data to transfer
+     *
+     * @param data         data to transfer
      * @param responseCode response code
      */
     public BaseResponse(T data, int responseCode) {

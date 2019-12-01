@@ -2,12 +2,9 @@ package com.journal.rest.controller;
 
 import com.journal.data.dto.ScheduleDto;
 import com.journal.data.dto.WeekResponseDto;
+import com.journal.data.dto.WeekTypeEnum;
 import com.journal.rest.BaseResponse;
 import com.journal.service.ScheduleService;
-import com.journal.data.dto.WeekDto;
-import com.journal.data.dto.WeekTypeEnum;
-import com.journal.data.entities.Schedule;
-import com.journal.data.entities.Week;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
