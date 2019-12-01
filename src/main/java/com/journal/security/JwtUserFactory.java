@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Implementation of Factory Method for class {@link JwtUser}.
  *
- * @author Eugene Suleimanov
+ * @author Vitalii Tasun
  * @version 1.0
  */
 
