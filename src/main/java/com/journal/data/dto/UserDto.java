@@ -5,8 +5,6 @@ import com.journal.data.entities.User;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
-import java.util.Set;
-
 @Data
 @ApiModel
 public class UserDto {
@@ -15,13 +13,13 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
-    private Set<Role> roles;
+    private Role role;
 
     public UserDto(User entity) {
-        id = entity.getNumberInGroupList();
+        id = entity.getId();
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
         email = entity.getEmail();
-        roles = entity.getRoles();
+        role = entity.getRole();
     }
 }

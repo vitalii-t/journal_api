@@ -9,15 +9,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @ApiModel
 public class UpdateUserDto {
-
-    @NotNull(message = "Id should not be empty")
-    private Long id;
 
     @NotNull(message = "Username should not be empty")
     @Pattern(regexp = "[a-zA-Z\\-_0-9]+",
@@ -29,6 +25,6 @@ public class UpdateUserDto {
     private String email;
 
     @NotEmpty(message = "Roles should not be empty")
-    private List<Role> roles;
+    private Role role;
 
 }

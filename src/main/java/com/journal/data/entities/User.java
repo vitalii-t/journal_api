@@ -26,12 +26,10 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "username", unique = true)
     private String username;
 
     private String password;
-
-    @Column(name = "list_number")
-    private Long numberInGroupList;
 
     @Column(name = "activation_code")
     private String activationCode;
@@ -45,11 +43,8 @@ public class User {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    @Column(name = "roles")
-    private Set<Role> roles;
+    private Role role;
 
     private boolean active;
 

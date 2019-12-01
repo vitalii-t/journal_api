@@ -12,12 +12,12 @@ public class CurrentUserDto {
 
     private String firstName;
     private String lastName;
-    private List<Role> roles;
+    private Role role;
 
     public CurrentUserDto(User entity){
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
-        this.roles = new ArrayList<>(entity.getRoles());
+        this.role = entity.getRole();
     }
 
 }
