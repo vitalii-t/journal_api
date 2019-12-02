@@ -3,6 +3,7 @@ package com.journal.data.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "registry")
@@ -21,4 +22,11 @@ public class Registry {
     private Subject subject;
 
     private boolean isPresent;
+
+    private LocalDate dateOfLesson;
+
+    @PrePersist
+    private void init(){
+        dateOfLesson = LocalDate.now();
+    }
 }
