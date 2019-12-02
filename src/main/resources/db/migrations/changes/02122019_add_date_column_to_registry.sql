@@ -1,0 +1,1 @@
+ALTER TABLE registry ADD COLUMN date_of_lesson date NOT NULL default now();
