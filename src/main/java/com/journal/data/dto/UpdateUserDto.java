@@ -24,7 +24,7 @@ public class UpdateUserDto {
     @Email
     private String email;
 
-    @NotEmpty(message = "Roles should not be empty")
+    @NotNull(message = "Roles should not be empty")
     private Role role;
 
 }
