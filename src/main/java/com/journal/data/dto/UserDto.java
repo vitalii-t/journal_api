@@ -12,6 +12,7 @@ public class UserDto {
     private Long id;
     private String firstName;
     private String lastName;
+    private String username;
     private String email;
     private Role role;
 
@@ -19,6 +20,7 @@ public class UserDto {
         id = entity.getId();
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
+        username = entity.getUsername();
         email = entity.getEmail();
         role = entity.getRole();
     }

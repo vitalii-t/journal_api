@@ -9,11 +9,13 @@ public class CurrentUserDto {
 
     private String firstName;
     private String lastName;
+    private String username;
     private Role role;
 
     public CurrentUserDto(User entity) {
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
+        this.username = entity.getUsername();
         this.role = entity.getRole();
     }
 
