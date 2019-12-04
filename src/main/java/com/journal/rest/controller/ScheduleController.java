@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,7 +50,7 @@ public class ScheduleController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public BaseResponse<List<WeekResponseDto>> subjectsSchedule(@RequestParam(value = "week_type",
+    public BaseResponse<Set<WeekResponseDto>> subjectsSchedule(@RequestParam(value = "week_type",
             defaultValue = "ODD") WeekTypeEnum weekType) {
 
         return new BaseResponse<>(scheduleService.findScheduleByWeek(weekType.name()), HttpStatus.OK.value());

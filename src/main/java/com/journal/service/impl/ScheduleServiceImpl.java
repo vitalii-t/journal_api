@@ -7,10 +7,13 @@ import com.journal.data.entities.Week;
 import com.journal.repository.ScheduleRepository;
 import com.journal.repository.WeekRepository;
 import com.journal.service.ScheduleService;
+import com.journal.util.DayOfWeekComparator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +28,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<WeekResponseDto> findScheduleByWeek(String weekType) {
+    public Set<WeekResponseDto> findScheduleByWeek(String weekType) {
 
+        DayOfWeekComparator comparator = new DayOfWeekComparator();
         List<Week> filteredByWeekType = weekRepository.findByWeekType(weekType.toLowerCase());
         List<WeekDto> dto = filteredByWeekType.stream().map(WeekDto::new).collect(Collectors.toList());
 
@@ -39,6 +43,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                             .collect(Collectors.toList()));
                     return responseDto;
                 })
-                .collect(Collectors.toList());
+                .sorted(comparator)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

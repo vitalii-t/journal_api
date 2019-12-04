@@ -1,4 +1,4 @@
-package com.journal.rest.serializers;
+package com.journal.util.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
