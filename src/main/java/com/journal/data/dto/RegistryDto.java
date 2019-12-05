@@ -10,7 +10,7 @@ public class RegistryDto {
 
     private Long userId;
 
-    @JsonProperty("isPresent")
-    private boolean isPresent;
+    @JsonProperty("present")
+    private boolean present;
 
 }
