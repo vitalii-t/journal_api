@@ -8,8 +8,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,6 +19,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+import java.sql.BatchUpdateException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +37,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     private static final String ERROR_NOT_FOUND_USERNAME = "User with such username not found!";
     private static final String ERROR_VALIDATE_DATA = "Received incorrect data.";
     private static final String UNAUTHORIZED = "Unauthorized";
+    private static final String FOREIGN_KEY_CONSTRAINT_FAILS = "Cannot add or update a child row: " +
+            "a foreign key constraint fails, please enter correct data";
 
     @ExceptionHandler(UserNotFoundException.class)
     protected ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception,
@@ -50,6 +56,22 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
+    @ExceptionHandler(value = {SQLIntegrityConstraintViolationException.class, BatchUpdateException.class})
+    protected ResponseEntity<Object> handleSQLIntegrityConstraintViolationException(
+            SQLException exception, WebRequest request) {
+        log.error(exception.getMessage());
+
+        ResponseBody responseBody = ResponseBody.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .message(FOREIGN_KEY_CONSTRAINT_FAILS)
+                .error(exception.getLocalizedMessage())
+                .path(((ServletWebRequest) request).getRequest().getRequestURI())
+                .build();
+
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
     @ExceptionHandler(UsernameNotFoundException.class)
     protected ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException exception,
                                                                      WebRequest request) {
@@ -59,6 +81,37 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(ERROR_NOT_FOUND_USERNAME)
+                .error(exception.getMessage())
+                .path(((ServletWebRequest) request).getRequest().getRequestURI())
+                .build();
+
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception, WebRequest request) {
+        log.error(exception.getMessage());
+
+        ResponseBody responseBody = ResponseBody.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(ERROR_VALIDATE_DATA)
+                .error(exception.getMessage())
+                .path(((ServletWebRequest) request).getRequest().getRequestURI())
+                .build();
+
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    protected ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException exception,
+                                                                    WebRequest request) {
+        log.error(exception.getMessage());
+
+        ResponseBody responseBody = ResponseBody.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(ERROR_VALIDATE_DATA)
                 .error(exception.getMessage())
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
@@ -100,8 +153,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, responseBody, new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED, request);
     }
 
-    @ExceptionHandler(AuthenticationServiceException.class)
-    protected ResponseEntity<Object> handleAuthenticationServiceException(AuthenticationServiceException exception, WebRequest request) {
+    @ExceptionHandler(AuthenticationException.class)
+    protected ResponseEntity<Object> handleAuthenticationServiceException(AuthenticationException exception, WebRequest request) {
         log.error(exception.getMessage());
 
         ResponseBody responseBody = ResponseBody.builder()

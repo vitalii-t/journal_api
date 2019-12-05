@@ -1,7 +1,6 @@
 package com.journal.util;
 
 import com.google.common.collect.Ordering;
-import com.journal.data.dto.WeekDto;
 import com.journal.data.dto.WeekResponseDto;
 
 import java.util.Arrays;
