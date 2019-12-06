@@ -7,7 +7,6 @@ import com.journal.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,8 +20,8 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     @ApiOperation("Register new user")
-    public ResponseEntity<Boolean> registration(@Valid @RequestBody CreateUserDto request) {
-        return new ResponseEntity<>(userService.register(fromDto(request)), HttpStatus.CREATED);
+    public BaseResponse<Boolean> registration(@Valid @RequestBody CreateUserDto request) {
+        return new BaseResponse<>(userService.register(fromDto(request)));
     }
 
     @GetMapping("/activate/{code}")
