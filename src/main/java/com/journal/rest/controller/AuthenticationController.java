@@ -1,5 +1,6 @@
 package com.journal.rest.controller;
 
+import com.journal.data.dto.CreateUserDto;
 import com.journal.data.dto.LoginDto;
 import com.journal.data.entities.User;
 import com.journal.rest.BaseResponse;
@@ -20,16 +21,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping
 @RequiredArgsConstructor
 @CrossOrigin
-public class LoginController {
+public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/login")
     @ApiOperation("Endpoint to login")
     public BaseResponse login(@RequestBody @Valid LoginDto request) {
 
@@ -55,5 +56,28 @@ public class LoginController {
             throw new BadCredentialsException("Invalid username or password!");
         }
 
+    }
+
+    @PostMapping("/registration")
+    @ApiOperation("Register new user")
+    public BaseResponse<Boolean> registration(@Valid @RequestBody CreateUserDto request) {
+        return new BaseResponse<>(userService.register(fromDto(request)));
+    }
+
+    @GetMapping("/activate/{code}")
+    public BaseResponse activate(@PathVariable String code) {
+        boolean isActivated = userService.activateUser(code);
+
+        return isActivated ? new BaseResponse<>("Account successfully activated!", HttpStatus.OK.value())
+                : new BaseResponse<>("Activation code not found!", HttpStatus.BAD_REQUEST.value());
+    }
+
+    private User fromDto(CreateUserDto createUserDto) {
+        return new User(
+                createUserDto.getFirstName(),
+                createUserDto.getLastName(),
+                createUserDto.getUsername(),
+                createUserDto.getPassword(),
+                createUserDto.getEmail());
     }
 }
