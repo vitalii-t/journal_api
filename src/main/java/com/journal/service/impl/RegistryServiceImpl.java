@@ -47,12 +47,12 @@ public class RegistryServiceImpl implements RegistryService {
 
         } else {
             LocalDate requestedDate = LocalDate.parse(date, formatter);
-            if (requestedDate.isBefore(LocalDate.now())) {
+//            if (requestedDate.isBefore(LocalDate.now())) {
 
                 return generateResponse(registryRepository.findAllByDateOfLesson(requestedDate), requestedDate);
-            } else {
-                throw new IllegalArgumentException("Date can't be greater than today. Should be today or earlier");
-            }
+//            } else {
+//                throw new IllegalArgumentException("Date can't be greater than today. Should be today or earlier");
+//            }
         }
     }
 
