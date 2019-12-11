@@ -7,6 +7,7 @@ import com.journal.service.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepository subjectRepository;
 
     @Override
+    @Transactional
     public List<SubjectDto> findAll() {
         return subjectRepository.findAll().stream()
                 .map(SubjectDto::new)
@@ -25,6 +27,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    @Transactional
     public Subject findById(Long id) {
         return subjectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Subject with id " + id + " not found!"));

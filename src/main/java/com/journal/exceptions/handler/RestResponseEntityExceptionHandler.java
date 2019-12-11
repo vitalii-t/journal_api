@@ -41,7 +41,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             "a foreign key constraint fails, please enter correct data";
 
     @ExceptionHandler(UserNotFoundException.class)
-    protected ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception,
+    protected ResponseEntity<Object> handleResourceNotFoundException(UserNotFoundException exception,
                                                                      WebRequest request) {
         log.error(exception.getMessage());
 
@@ -53,7 +53,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
 
-        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(value = {SQLIntegrityConstraintViolationException.class, BatchUpdateException.class})
@@ -85,7 +85,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
 
-        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -116,7 +116,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
 
-        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
@@ -132,7 +132,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
 
-        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(exception, responseBody, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
     @Override
