@@ -10,6 +10,7 @@ import com.journal.service.ScheduleService;
 import com.journal.util.DayOfWeekComparator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    @Transactional
     public Set<WeekResponseDto> findScheduleByWeek(String weekType) {
 
         DayOfWeekComparator comparator = new DayOfWeekComparator();

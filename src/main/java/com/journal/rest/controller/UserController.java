@@ -51,20 +51,6 @@ public class UserController {
         return new BaseResponse<>();
     }
 
-    @ApiOperation("Delete one user by id")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully delete user"),
-            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
-            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-    })
-    @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR')")
-    public BaseResponse<HttpStatus> deleteUser(@PathVariable Long id) {
-        userService.delete(id);
-        return new BaseResponse<>(HttpStatus.OK);
-    }
-
     @GetMapping("/current")
     public BaseResponse<CurrentUserDto> getCurrentUser() {
 

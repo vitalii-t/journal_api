@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean register(User user) {
 
         User userFromDB = userRepository.findByUsername(user.getUsername());
@@ -70,6 +72,8 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    @Transactional
     public boolean activateUser(String code) {
         User user = userRepository.findByActivationCode(code);
 
@@ -86,6 +90,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void update(UpdateUserDto dto, Long id) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("User with such number in group list not found!"));
@@ -96,6 +101,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User findById(Long id) {
         log.info("Retrieving user by id {}", id);
 
@@ -115,6 +121,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public CurrentUserDto getCurrentUser() {
         return new CurrentUserDto(authenticatedUser.getAuthenticatedUser());
     }
