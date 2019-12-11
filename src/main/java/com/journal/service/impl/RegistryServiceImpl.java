@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -68,20 +67,16 @@ public class RegistryServiceImpl implements RegistryService {
     }
 
     private RegistryResponseDto generateResponse(List<Registry> registryByDate, LocalDate requestedDate) {
-        Set<UserSubjectDto> collect = registryByDate.stream()
-                .map(registry -> {
-                    SubjectDto dto = new SubjectDto(registry.getSubject());
-
-                    List<RegistryUserDto> regUsr = registryByDate.stream().map(registry1 -> {
-                        if (registry1.getSubject().equals(registry.getSubject())) {
-                            return new RegistryUserDto(registry.getUser(), registry.isPresent());
-                        }
-                        return null;
-                    }).collect(Collectors.toList());
-regUsr.removeAll(Collections.singletonList(null));
-                    return new UserSubjectDto(dto, regUsr);
-                }).collect(Collectors.toSet());
-        return new RegistryResponseDto(requestedDate,new ArrayList<>(collect));
+        Set<UserSubjectDto> collect = registryByDate.stream().map(registry -> {
+            UserSubjectDto dto = new UserSubjectDto();
+            dto.setSubject(new SubjectDto(registry.getSubject()));
+            dto.setUsers(registryByDate.stream()
+                    .filter(registry1 -> registry1.getSubject().equals(registry.getSubject()))
+                    .map(registry1 -> new RegistryUserDto(registry1.getUser(), registry1.isPresent()))
+                    .collect(Collectors.toList()));
+            return dto;
+        }).collect(Collectors.toSet());
+        return new RegistryResponseDto(requestedDate, new ArrayList<>(collect));
     }
 
 }
