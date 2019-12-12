@@ -24,6 +24,7 @@ import java.sql.BatchUpdateException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -181,12 +182,15 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-
+        String errorsString = errors.toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(";,", ";");
         ResponseBody responseBody = ResponseBody.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
                 .message(ERROR_VALIDATE_DATA)
-                .error(errors.toString())
+                .error(errorsString)
                 .path(((ServletWebRequest) request).getRequest().getRequestURI())
                 .build();
 
