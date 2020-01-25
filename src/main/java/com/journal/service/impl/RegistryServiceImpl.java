@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.journal.util.DatesUtil.FORMATTER;
 
 @Service
 @RequiredArgsConstructor
@@ -51,13 +52,13 @@ public class RegistryServiceImpl implements RegistryService {
     @Override
     @Transactional
     public RegistryResponseDto findAllByDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         if (date == null || date.isEmpty()) {
 
             return generateResponse(registryRepository.findAllByDateOfLesson(LocalDate.now()), LocalDate.now());
 
         } else {
-            LocalDate requestedDate = LocalDate.parse(date, formatter);
+            LocalDate requestedDate = LocalDate.parse(date, FORMATTER);
             if (requestedDate.equals(LocalDate.now()) || requestedDate.isBefore(LocalDate.now())) {
                 return generateResponse(registryRepository.findAllByDateOfLesson(requestedDate), requestedDate);
             } else {
