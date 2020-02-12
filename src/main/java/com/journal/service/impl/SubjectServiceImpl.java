@@ -20,9 +20,9 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     @Transactional
-    public List<SubjectDto> findAll() {
+    public List<SubjectDto> findAll(String lang) {
         return subjectRepository.findAll().stream()
-                .map(SubjectDto::new)
+                .map(subject -> toDto(subject, lang))
                 .collect(Collectors.toList());
     }
 
@@ -32,4 +32,12 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Subject with id " + id + " not found!"));
     }
+
+    private SubjectDto toDto(Subject entity, String lang) {
+        return SubjectDto.builder()
+                .id(entity.getId())
+                .name(lang.equalsIgnoreCase("en") ? entity.getSubjectNameEn() : entity.getSubjectNameUa())
+                .build();
+    }
+
 }

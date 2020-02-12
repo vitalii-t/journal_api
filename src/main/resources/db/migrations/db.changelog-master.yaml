@@ -37,13 +37,3 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: /db/migrations/changes/data.sql
-  - changeSet:
-      validCheckSum: ANY
-      id: 02122019_add_date_to_registry
-      author: v.tasun
-      preConditions:
-        - onFail: HALT
-      changes:
-        - sqlFile:
-            encoding: utf8
-            path: /db/migrations/changes/02122019_add_date_column_to_registry.sql

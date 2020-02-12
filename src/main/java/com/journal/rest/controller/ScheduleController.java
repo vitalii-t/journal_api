@@ -3,6 +3,7 @@ package com.journal.rest.controller;
 import com.journal.data.dto.ScheduleDto;
 import com.journal.data.dto.WeekResponseDto;
 import com.journal.data.dto.WeekTypeEnum;
+import com.journal.data.entities.WeekType;
 import com.journal.rest.BaseResponse;
 import com.journal.service.ScheduleService;
 import io.swagger.annotations.ApiOperation;
@@ -50,8 +51,8 @@ public class ScheduleController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public BaseResponse<Set<WeekResponseDto>> subjectsSchedule(@RequestParam(value = "week_type",
-            defaultValue = "ODD") WeekTypeEnum weekType) {
+            defaultValue = "ODD") WeekType weekType, @RequestParam(defaultValue = "ua", required = false) String lang) {
 
-        return new BaseResponse<>(scheduleService.findScheduleByWeek(weekType.name()), HttpStatus.OK.value());
+        return new BaseResponse<>(scheduleService.findScheduleByWeek(weekType, lang), HttpStatus.OK.value());
     }
 }

@@ -4,6 +4,7 @@ import com.journal.data.dto.WeekDto;
 import com.journal.data.dto.WeekResponseDto;
 import com.journal.data.entities.Schedule;
 import com.journal.data.entities.Week;
+import com.journal.data.entities.WeekType;
 import com.journal.repository.ScheduleRepository;
 import com.journal.repository.WeekRepository;
 import com.journal.service.ScheduleService;
@@ -30,11 +31,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public Set<WeekResponseDto> findScheduleByWeek(String weekType) {
+    public Set<WeekResponseDto> findScheduleByWeek(WeekType weekType, String lang) {
 
         DayOfWeekComparator comparator = new DayOfWeekComparator();
-        List<Week> filteredByWeekType = weekRepository.findByWeekType(weekType.toLowerCase());
-        List<WeekDto> dto = filteredByWeekType.stream().map(WeekDto::new).collect(Collectors.toList());
+        List<Week> filteredByWeekType = weekRepository.findAllByWeekType(weekType);
+        List<WeekDto> dto = filteredByWeekType.stream()
+                .map(week -> toDto(week, lang))
+                .collect(Collectors.toList());
 
         return dto.stream()
                 .map(dto1 -> {
@@ -48,4 +51,13 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .sorted(comparator)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
+
+    private WeekDto toDto(Week entity, String lang) {
+        return WeekDto.builder()
+                .dayOfWeek(lang.equalsIgnoreCase("en") ? entity.getDayOfTheWeek().getEn() : entity.getDayOfTheWeek().getUa())
+                .index(entity.getLessonIndex())
+                .subject(lang.equalsIgnoreCase("en") ? entity.getSubject().getSubjectNameEn() : entity.getSubject().getSubjectNameUa())
+                .build();
+    }
+
 }

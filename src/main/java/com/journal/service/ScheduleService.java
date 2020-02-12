@@ -2,6 +2,8 @@ package com.journal.service;
 
 import com.journal.data.dto.WeekResponseDto;
 import com.journal.data.entities.Schedule;
+import com.journal.data.entities.WeekType;
+import lombok.SneakyThrows;
 
 import java.util.List;
 import java.util.Set;
@@ -22,5 +24,5 @@ public interface ScheduleService {
      * @param weekType week type
      * @return filtered schedule
      */
-    Set<WeekResponseDto> findScheduleByWeek(String weekType);
+    Set<WeekResponseDto> findScheduleByWeek(WeekType weekType, String lang);
 }

@@ -15,9 +15,10 @@ public interface UserService {
     /**
      * Find all users
      *
+     * @param lang language code
      * @return list of users
      */
-    List<UserDto> findAll();
+    List<UserDto> findAll(String lang);
 
     /**
      * Register user in system
@@ -66,6 +67,11 @@ public interface UserService {
      */
     User findUserByUsername(String username);
 
-
-    CurrentUserDto getCurrentUser();
+    /**
+     * Get info about current user
+     *
+     * @param lang language code
+     * @return info about current user
+     */
+    CurrentUserDto getCurrentUser(String lang);
 }

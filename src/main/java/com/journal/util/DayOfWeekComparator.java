@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class DayOfWeekComparator implements Comparator<WeekResponseDto> {
 
     private final Ordering<String> dayOrdering = Ordering.explicit(Arrays
-            .asList("понеділок", "вівторок", "середа", "четвер", "п`ятниця"));
+            .asList("Понеділок", "Вівторок", "Середа", "Четвер", "П`ятниця", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"));
 
 
     @Override

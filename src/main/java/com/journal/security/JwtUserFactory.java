@@ -23,8 +23,8 @@ public final class JwtUserFactory {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),
-                user.getFirstName(),
-                user.getLastName(),
+                user.getFirstNameUa(),
+                user.getLastNameUa(),
                 user.getEmail(),
                 user.getPassword(),
                 mapToGrantedAuthorities(user.getRole()),

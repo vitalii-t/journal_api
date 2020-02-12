@@ -19,5 +19,8 @@ public class Subject {
     private Long id;
 
     @Column
-    private String subjectName;
+    private String subjectNameUa;
+
+    @Column
+    private String subjectNameEn;
 }
