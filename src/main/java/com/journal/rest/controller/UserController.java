@@ -33,8 +33,8 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public BaseResponse<List<UserDto>> findAllUsers() {
-        return new BaseResponse<>(userService.findAll(), HttpStatus.OK.value());
+    public BaseResponse<List<UserDto>> findAllUsers(@RequestParam(required = false, defaultValue = "ua") String lang) {
+        return new BaseResponse<>(userService.findAll(lang), HttpStatus.OK.value());
     }
 
     @ApiOperation("Update one user by id")
@@ -52,9 +52,9 @@ public class UserController {
     }
 
     @GetMapping("/current")
-    public BaseResponse<CurrentUserDto> getCurrentUser() {
+    public BaseResponse<CurrentUserDto> getCurrentUser(@RequestParam(required = false, defaultValue = "ua") String lang) {
 
-        return new BaseResponse<>(userService.getCurrentUser(), HttpStatus.OK.value());
+        return new BaseResponse<>(userService.getCurrentUser(lang), HttpStatus.OK.value());
     }
 
 }

@@ -12,9 +12,9 @@ public class CurrentUserDto {
     private String username;
     private Role role;
 
-    public CurrentUserDto(User entity) {
-        this.firstName = entity.getFirstName();
-        this.lastName = entity.getLastName();
+    public CurrentUserDto(User entity, String lang) {
+        this.firstName = lang.equalsIgnoreCase("en") ? entity.getLastNameEn() : entity.getFirstNameUa();
+        this.lastName = lang.equalsIgnoreCase("en") ? entity.getLastNameEn() : entity.getLastNameUa();
         this.username = entity.getUsername();
         this.role = entity.getRole();
     }

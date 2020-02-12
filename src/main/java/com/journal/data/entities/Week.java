@@ -19,12 +19,14 @@ public class Week {
     private Subject subject;
 
     @Column(name = "week_type")
-    private String weekType;
+    @Enumerated(EnumType.STRING)
+    private WeekType weekType;
 
     @Column(name = "lesson_index")
     private Long lessonIndex;
 
     @Column(name = "week_day")
-    private String dayOfTheWeek;
+    @Enumerated(EnumType.STRING)
+    private DayOfWeekEnum dayOfTheWeek;
 
 }

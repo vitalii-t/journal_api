@@ -52,17 +52,19 @@ public class RegistryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STUDENT', 'MONITOR')")
-    public BaseResponse<RegistryResponseDto> getRegistryForDate(@RequestParam(required = false) String date) {
-        return new BaseResponse<>(registryService.findAllByDate(date));
+    public BaseResponse<RegistryResponseDto> getRegistryForDate(@RequestParam(required = false) String date,
+                                                                @RequestParam(required = false, defaultValue = "ua") String lang) {
+        return new BaseResponse<>(registryService.findAllByDate(date, lang));
     }
 
     @PostMapping(value = "/report", produces = "application/vnd.ms-excel")
-    public ResponseEntity<InputStreamResource> getRegistryReport(@RequestBody @Valid RegistryByDatesDto request) {
+    public ResponseEntity<InputStreamResource> getRegistryReport(@RequestBody @Valid RegistryByDatesDto request,
+    @RequestParam(required = false, defaultValue = "ua") String lang) {
 
         LocalDate dateFrom = request.getDateFrom();
         LocalDate dateTo = request.getDateTo();
 
-        ByteArrayInputStream report = registryReportBuilder.export(dateFrom, dateTo);
+        ByteArrayInputStream report = registryReportBuilder.export(dateFrom, dateTo, lang);
 
         String fileName = dateFrom.equals(dateTo) ? "Report_" + dateFrom +".xls"
                 : "Report_" + dateFrom + "_to_" + dateTo + ".xls";

@@ -11,7 +11,8 @@ public interface RegistryService {
      * Get registry to specified date. By default - previous day
      *
      * @param date date
+     * @param lang language
      * @return registry records made on specified date
      */
-    RegistryResponseDto findAllByDate(String date);
+    RegistryResponseDto findAllByDate(String date, String lang);
 }

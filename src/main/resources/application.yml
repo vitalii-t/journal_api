@@ -19,4 +19,4 @@ spring:
 jwt:
   token:
     secret: Journal
-    duration: 1000000000
+    duration: 86400000

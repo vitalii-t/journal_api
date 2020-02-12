@@ -13,12 +13,12 @@ import javax.validation.constraints.Size;
 public class CreateUserDto {
 
     @NotNull(message = "First name should not be empty;")
-    @Pattern(regexp = "[A-Za-z\u0430-\u044f\u0410-\u044f\\s\\-]+",
+    @Pattern(regexp = "[\\p{IsCyrillic}'`-]+",
             message = "First name can contain only cyrillic and english letters, (space), -;")
     private String firstName;
 
     @NotNull(message = "Last name should not be empty;")
-    @Pattern(regexp = "[A-Za-z\u0430-\u044f\u0410-\u044f\\s\\-]+",
+    @Pattern(regexp = "[\\p{IsCyrillic}'`-]+",
             message = "Last name can contain only cyrillic and english letters, (space), -;")
     private String lastName;
 

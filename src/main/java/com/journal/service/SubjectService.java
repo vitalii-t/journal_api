@@ -9,10 +9,10 @@ public interface SubjectService {
 
     /**
      * Find all subjects
-     *
-     * @return list of sujects
+     * @param lang language
+     * @return list of subjects
      */
-    List<SubjectDto> findAll();
+    List<SubjectDto> findAll(String lang);
 
     /**
      * Find subject by id

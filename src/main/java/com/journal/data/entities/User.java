@@ -19,11 +19,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "first_name_ua")
+    private String firstNameUa;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "last_name_ua")
+    private String lastNameUa;
+
+    @Column(name = "first_name_en")
+    private String firstNameEn;
+
+    @Column(name = "last_name_en")
+    private String lastNameEn;
 
     @Column(name = "username", unique = true)
     private String username;
@@ -48,8 +54,8 @@ public class User {
     private boolean active;
 
     public User(String firstName, String lastName, String username, String password, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstNameUa = firstName;
+        this.lastNameUa = lastName;
         this.username = username;
         this.password = password;
         this.email = email;

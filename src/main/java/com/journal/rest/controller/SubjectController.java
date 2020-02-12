@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class SubjectController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public BaseResponse<List<SubjectDto>> getAllSubjects() {
-        return new BaseResponse<>(subjectService.findAll());
+    public BaseResponse<List<SubjectDto>> getAllSubjects(@RequestParam(required = false, defaultValue = "ua") String lang) {
+        return new BaseResponse<>(subjectService.findAll(lang));
     }
 }
