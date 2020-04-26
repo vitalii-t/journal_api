@@ -68,6 +68,19 @@ public class RegistryServiceImpl implements RegistryService {
         }
     }
 
+    @Override
+    public List<RegistryByUserAndDatesDtoResponse> getRegistryByUserIdAndDates(RegistryByUserAndDatesDtoRequest request, String lang) {
+        User user = userService.findById(request.getUserId());
+
+        if (request.getTo().isBefore(request.getFrom())) {
+            throw new IllegalArgumentException("Date from can't be greater than date to");
+        }
+        List<Registry> registry = registryRepository.findAllByDateOfLessonBetweenAndUser(request.getFrom(), request.getTo(), user);
+        return registry.stream()
+                .map(record -> new RegistryByUserAndDatesDtoResponse(record, lang))
+                .collect(Collectors.toList());
+    }
+
     private RegistryResponseDto generateResponse(List<Registry> registryByDate, LocalDate requestedDate, String lang) {
         Set<UserSubjectDto> collect = registryByDate.stream().map(registry -> {
             UserSubjectDto dto = new UserSubjectDto();
