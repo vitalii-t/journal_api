@@ -1,9 +1,7 @@
 package com.journal.rest.controller;
 
 
-import com.journal.data.dto.AddRecordDto;
-import com.journal.data.dto.RegistryByDatesDto;
-import com.journal.data.dto.RegistryResponseDto;
+import com.journal.data.dto.*;
 import com.journal.rest.BaseResponse;
 import com.journal.service.RegistryReportBuilder;
 import com.journal.service.RegistryService;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/registry")
@@ -58,6 +57,13 @@ public class RegistryController {
     }
 
     @PostMapping(value = "/report", produces = "application/vnd.ms-excel")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully get report"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MONITOR')")
     public ResponseEntity<InputStreamResource> getRegistryReport(@RequestBody @Valid RegistryByDatesDto request,
     @RequestParam(required = false, defaultValue = "ua") String lang) {
 
@@ -74,4 +80,19 @@ public class RegistryController {
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(new InputStreamResource(report));
     }
+
+    @PostMapping("/user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully get registry by user id and dates interval"),
+            @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'STUDENT', 'MONITOR')")
+    public BaseResponse<List<RegistryByUserAndDatesDtoResponse>> getRegistryByUserAndDates(
+            @RequestBody @Valid RegistryByUserAndDatesDtoRequest request,
+            @RequestParam(required = false, defaultValue = "ua") String lang){
+        return new BaseResponse<>(registryService.getRegistryByUserIdAndDates(request, lang));
+    }
+
 }
