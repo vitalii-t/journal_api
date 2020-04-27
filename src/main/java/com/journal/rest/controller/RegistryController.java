@@ -81,7 +81,7 @@ public class RegistryController {
                 .body(new InputStreamResource(report));
     }
 
-    @PostMapping("/user")
+    @GetMapping("/user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully get registry by user id and dates interval"),
             @ApiResponse(code = 401, message = "You are not authenticated to view this resource"),
