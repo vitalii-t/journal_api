@@ -5,9 +5,7 @@ import com.journal.data.dto.*;
 import com.journal.rest.BaseResponse;
 import com.journal.service.RegistryReportBuilder;
 import com.journal.service.RegistryService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -63,6 +62,7 @@ public class RegistryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
+    @ApiOperation("Get .xls report")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'MONITOR')")
     public ResponseEntity<InputStreamResource> getRegistryReport(@RequestBody @Valid RegistryByDatesDto request,
     @RequestParam(required = false, defaultValue = "ua") String lang) {
@@ -88,10 +88,18 @@ public class RegistryController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
+    @ApiOperation("get registry by user and dates")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'STUDENT', 'MONITOR')")
     public BaseResponse<List<RegistryByUserAndDatesDtoResponse>> getRegistryByUserAndDates(
-            @RequestBody @Valid RegistryByUserAndDatesDtoRequest request,
+            @RequestParam String dateFrom,
+            @RequestParam String dateTo,
+            @RequestParam Long userId,
             @RequestParam(required = false, defaultValue = "ua") String lang){
+        RegistryByUserAndDatesDtoRequest request = RegistryByUserAndDatesDtoRequest.builder()
+                .userId(userId)
+                .from(LocalDate.parse(dateFrom, DateTimeFormatter.ISO_LOCAL_DATE))
+                .to(LocalDate.parse(dateTo, DateTimeFormatter.ISO_LOCAL_DATE))
+                .build();
         return new BaseResponse<>(registryService.getRegistryByUserIdAndDates(request, lang));
     }
 
