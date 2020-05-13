@@ -8,8 +8,9 @@ import com.journal.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @CrossOrigin
 @PreAuthorize("hasAnyAuthority('ADMIN','MONITOR','STUDENT')")
 public class UserController {
@@ -55,6 +56,12 @@ public class UserController {
     public BaseResponse<CurrentUserDto> getCurrentUser(@RequestParam(required = false, defaultValue = "ua") String lang) {
 
         return new BaseResponse<>(userService.getCurrentUser(lang), HttpStatus.OK.value());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
