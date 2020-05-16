@@ -13,7 +13,6 @@ import com.journal.repository.UserRepository;
 import com.journal.service.AuthenticatedUser;
 import com.journal.service.MailSender;
 import com.journal.service.UserService;
-import com.journal.util.TranslateApi;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -128,7 +128,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         log.info("Deleting user with id {}", id);
-        userRepository.deleteById(id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            userRepository.delete(optionalUser.get());
+        } else {
+            throw new UserNotFoundException("User with id " + id + " not found!");
+        }
     }
 
     public User findUserByUsername(String username) {

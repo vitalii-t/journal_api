@@ -6,11 +6,6 @@ spring:
     enabled: true
     change-log: classpath:db/migrations/db.changelog-master.yaml
   mail:
-    #    host: smtp.gmail.com
-    #    username: vetvet99@gmail.com
-    #    password: 765232wersxcd
-    #    port: 465
-    #    protocol: smtps
     host: smtp.yandex.ru
     username: tank.33@yandex.ru
     password: 765232wersxcd
@@ -19,4 +14,4 @@ spring:
 jwt:
   token:
     secret: Journal
-    duration: 86400000
+    duration: 28800000

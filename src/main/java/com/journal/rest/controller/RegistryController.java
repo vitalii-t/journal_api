@@ -3,8 +3,10 @@ package com.journal.rest.controller;
 
 import com.journal.data.dto.*;
 import com.journal.rest.BaseResponse;
+import com.journal.service.AuthenticatedUser;
 import com.journal.service.RegistryReportBuilder;
 import com.journal.service.RegistryService;
+import com.journal.service.UserService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
@@ -27,6 +29,7 @@ public class RegistryController {
 
     private final RegistryService registryService;
     private final RegistryReportBuilder registryReportBuilder;
+    private final AuthenticatedUser authenticatedUser;
 
     @PostMapping
     @ApiOperation("add record to registry")
@@ -93,10 +96,9 @@ public class RegistryController {
     public BaseResponse<List<RegistryByUserAndDatesDtoResponse>> getRegistryByUserAndDates(
             @RequestParam String dateFrom,
             @RequestParam String dateTo,
-            @RequestParam Long userId,
             @RequestParam(required = false, defaultValue = "ua") String lang){
         RegistryByUserAndDatesDtoRequest request = RegistryByUserAndDatesDtoRequest.builder()
-                .userId(userId)
+                .userId(authenticatedUser.getAuthenticatedUser().getId())
                 .from(LocalDate.parse(dateFrom, DateTimeFormatter.ISO_LOCAL_DATE))
                 .to(LocalDate.parse(dateTo, DateTimeFormatter.ISO_LOCAL_DATE))
                 .build();
