@@ -66,11 +66,10 @@ public class UserServiceImpl implements UserService {
         user.setActivationCode(UUID.randomUUID().toString());
         YTranslateApiImpl api = new YTranslateApiImpl("trnsl.1.1.20200209T113629Z.95746629c3744849.f1309328eb91f4900deed9b2fe4b551d6e108407");
 
-        String name = api.translationApi().translate(user.getFirstNameUa() + " " + user.getLastNameUa(), Language.EN).text();
-//        String name = TranslateApi.translate(user.getFirstNameUa() + " " + user.getLastNameUa(), "uk", "en");
+        /*String name = api.translationApi().translate(user.getFirstNameUa() + " " + user.getLastNameUa(), Language.EN).text();
         String[] s = name.split(" ");
         user.setFirstNameEn(s[0]);
-        user.setLastNameEn(s[1]);
+        user.setLastNameEn(s[1]);*/
         userRepository.save(user);
         log.info("Saved new user {}", user.toString());
 
@@ -130,7 +129,9 @@ public class UserServiceImpl implements UserService {
         log.info("Deleting user with id {}", id);
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
-            userRepository.delete(optionalUser.get());
+            User user = optionalUser.get();
+            user.setGroup(null);
+            userRepository.delete(user);
         } else {
             throw new UserNotFoundException("User with id " + id + " not found!");
         }
