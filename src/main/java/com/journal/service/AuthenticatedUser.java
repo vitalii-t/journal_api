@@ -24,7 +24,7 @@ public class AuthenticatedUser {
     public User getAuthenticatedUser() {
         String loggedInUserLogin = getCurrentUserUsername();
         if (loggedInUserLogin != null) {
-            return Optional.ofNullable(userRepository.findByUsername(loggedInUserLogin))
+            return Optional.ofNullable(userRepository.findByUsernameAndActiveIsTrue(loggedInUserLogin))
                     .orElseThrow(() -> new ResourceNotFoundException("User not found!"));
         }
         return null;
