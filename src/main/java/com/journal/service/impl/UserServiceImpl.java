@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @SneakyThrows
     public boolean register(User user) {
 
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+        User userFromDB = userRepository.findByUsernameAndActiveIsTrue(user.getUsername());
 
         if (userFromDB != null) {
             return false;
@@ -66,10 +66,10 @@ public class UserServiceImpl implements UserService {
         user.setActivationCode(UUID.randomUUID().toString());
         YTranslateApiImpl api = new YTranslateApiImpl("trnsl.1.1.20200209T113629Z.95746629c3744849.f1309328eb91f4900deed9b2fe4b551d6e108407");
 
-        /*String name = api.translationApi().translate(user.getFirstNameUa() + " " + user.getLastNameUa(), Language.EN).text();
+        String name = api.translationApi().translate(user.getFirstNameUa() + " " + user.getLastNameUa(), Language.EN).text();
         String[] s = name.split(" ");
         user.setFirstNameEn(s[0]);
-        user.setLastNameEn(s[1]);*/
+        user.setLastNameEn(s[1]);
         userRepository.save(user);
         log.info("Saved new user {}", user.toString());
 
@@ -130,8 +130,8 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            user.setGroup(null);
-            userRepository.delete(user);
+            user.setActive(false);
+            userRepository.save(user);
         } else {
             throw new UserNotFoundException("User with id " + id + " not found!");
         }
@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
 
     public User findUserByUsername(String username) {
         log.info("Retrieving user by username {}", username);
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsernameAndActiveIsTrue(username);
     }
 
     @Override

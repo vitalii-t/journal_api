@@ -10,15 +10,13 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT u FROM User u ORDER BY u.lastNameUa")
+    @Query(value = "SELECT u FROM User u WHERE u.active=true ORDER BY u.lastNameUa")
     List<User> findAllOrderedByLastNameUa();
 
-    @Query(value = "SELECT u FROM User u ORDER BY u.lastNameEn")
+    @Query(value = "SELECT u FROM User u WHERE u.active=true ORDER BY u.lastNameEn")
     List<User> findAllOrderedByLastNameEn();
 
-//    List<User> findAllOrderByLastNameUa();
-
-    User findByUsername(String username);
+    User findByUsernameAndActiveIsTrue(String username);
 
     User findByActivationCode(String code);
 
